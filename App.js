@@ -13,11 +13,13 @@ export default function App() {
   const [clearDisplay, setClearDisplay] = useState(false);
 
   const addDigit = (n) =>{
-    if(n == "." && displayValue.includes(".")){
+    
+    const isClearDisplay = displayValue == '0' || clearDisplay
+
+    if(n == "." && !isClearDisplay && displayValue.includes(".")){
       return
     }
-
-    const isClearDisplay = displayValue == '0' || clearDisplay
+    
     const currentValue = isClearDisplay ? "" : displayValue
     const isDisplayValue = currentValue + n
 
@@ -57,7 +59,7 @@ export default function App() {
       }
 
       nValues[1] = 0
-      setDisplayValue(nValues[0])
+      setDisplayValue(`${nValues[0]}`)
       setOperation(equals? null : nOperation)
       setCurrent(equals? 0 : 1)
       setClearDisplay(!equals)
